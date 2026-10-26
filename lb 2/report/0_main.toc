@@ -1,0 +1,22 @@
+\babel@toc {russian}{}\relax 
+\contentsline {chapter}{Введение}{3}{chapter*.2}%
+\contentsline {chapter}{\chapternumberline {1}Выполнение работы}{4}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Исходные данные и параметры моделирования}{4}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Часть 1. Приём сигнала при прямом луче}{4}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Модель траектории и расстояний}{4}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Комплексная огибающая, амплитуда и фаза}{5}{subsection.1.2.2}%
+\contentsline {section}{\numberline {1.3}Часть 2. Приём сигнала при большом числе источников переотражений}{7}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Сценарий моделирования}{7}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Траектория перемещения абонента}{7}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Расстояния BS--SC--MS}{8}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.3.4}Принимаемый сигнал}{8}{subsection.1.3.4}%
+\contentsline {subsection}{\numberline {1.3.5}Характеристики принимаемого сигнала}{9}{subsection.1.3.5}%
+\contentsline {subsection}{\numberline {1.3.6}Статистические характеристики модуля}{10}{subsection.1.3.6}%
+\contentsline {subsection}{\numberline {1.3.7}Автокорреляционная функция}{11}{subsection.1.3.7}%
+\contentsline {section}{\numberline {1.4}Контрольные вопросы}{12}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Почему при одном луче амплитуда постоянна, а при многих — флуктуирует?}{12}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}От чего зависит доплеровский сдвиг и почему в части 1 спектр — одна линия, а в части 2 — полоса?}{12}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Почему шаг дискретизации по расстоянию выбирается как $\Delta x = \lambda /F$?}{12}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}Как по гистограмме модуля убедиться, что канал релеевский?}{13}{subsection.1.4.4}%
+\contentsline {subsection}{\numberline {1.4.5}В чём смысл автокорреляционной функции принимаемого сигнала?}{13}{subsection.1.4.5}%
+\contentsline {section}{Вывод}{13}{section*.11}%
