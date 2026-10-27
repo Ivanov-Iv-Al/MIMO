@@ -1,5 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy.io as sp
+from numpy.linalg import inv
+from numpy import linalg as la
 
 Nc = 64
 N_pilot = 8
@@ -13,6 +16,18 @@ cfo_true = 0.25
 pilot_indices = np.linspace(0, Nc - 1, N_pilot, dtype=int)
 data_indices = np.delete(np.arange(Nc), pilot_indices)
 pilot_value = 1 + 1j
+
+Hmatr = sp.loadmat("H16_uma_nlos_2.mat") #ЧХ канала
+hl = list(Hmatr.values())
+
+h1 = hl[3]
+
+ht = np.fft.ifft(h1)
+
+plt.plot(np.abs(h1[0, 0, :, 0]))
+plt.xlabel("Поднесущие")
+plt.ylabel("Амплитуда")
+plt.show()
 
 h_channel = np.array([1.0, 0.4 + 0.31j, 0.1 - 0.2j])
 H_channel_true = np.fft.fft(h_channel, n=Nc)
