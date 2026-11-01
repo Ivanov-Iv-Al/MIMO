@@ -1,8 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.io as sp
-from numpy.linalg import inv
-from numpy import linalg as la
 
 Nc = 64
 N_pilot = 8
@@ -13,24 +11,19 @@ N_sym_total = Ng + Nc
 sto_true = 7
 cfo_true = 0.25
 
-pilot_indices = np.linspace(0, Nc - 1, N_pilot, dtype=int)
+pilot_indices = np.arange(0, Nc, Nc // N_pilot)
 data_indices = np.delete(np.arange(Nc), pilot_indices)
 pilot_value = 1 + 1j
 
-Hmatr = sp.loadmat("H16_uma_nlos_2.mat") #ЧХ канала
+Hmatr = sp.loadmat("H16_uma_nlos_2.mat")
 hl = list(Hmatr.values())
-
 h1 = hl[3]
 
-ht = np.fft.ifft(h1)
-
-plt.plot(np.abs(h1[0, 0, :, 0]))
-plt.xlabel("Поднесущие")
-plt.ylabel("Амплитуда")
-plt.show()
-
-h_channel = np.array([1.0, 0.4 + 0.31j, 0.1 - 0.2j])
-H_channel_true = np.fft.fft(h_channel, n=Nc)
+cfr = h1[0, 0, :, 0]
+cfr = cfr[:Nc]
+h_imp = np.fft.ifft(cfr, n=Nc)
+h_imp = h_imp[:Ng]
+H_channel_true = np.fft.fft(h_imp, n=Nc)
 
 SNR_dB_range = np.arange(0, 15, 2)
 ser_results = []
@@ -65,7 +58,7 @@ for SNR_dB in SNR_dB_range:
         cp = ofdm_time[-Ng:]
         ofdm_tx = np.concatenate([cp, ofdm_time])
 
-        ofdm_fading = np.convolve(ofdm_tx, h_channel)[:len(ofdm_tx)]
+        ofdm_fading = np.convolve(ofdm_tx, h_imp)[:len(ofdm_tx)]
 
         n_axis = np.arange(len(ofdm_fading))
         ofdm_distorted = ofdm_fading * np.exp(1j * 2 * np.pi * n_axis * cfo_true / Nc)
@@ -91,6 +84,8 @@ for SNR_dB in SNR_dB_range:
                 cc[n] = num / den
 
         n_max = np.argmax(np.abs(cc))
+        if np.abs(cc[n_max]) < 0.9:
+            continue
         m_est = n_max - Nc
 
         ofdm_rx_sync_time = ofdm_rx_stream[m_est : m_est + Nc]
