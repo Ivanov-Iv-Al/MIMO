@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-lam = 1.0
+f = 2e+9
+lam = 299792458/f
 d = lam / 2
 theta_deg = np.linspace(-180, 180, 3601)
 theta = np.deg2rad(theta_deg)
