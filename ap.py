@@ -31,7 +31,7 @@ def af_formula(N, theta, d, lam, theta0_deg=None):
     return out
 
 def element_pattern(theta, theta3db=70.0, Am=20.0):
-    return -np.minimum(12 * (theta_deg / theta3db) ** 2, Am)
+    return -np.minimum(12 * (theta / theta3db) ** 2, Am)
 
 def polar_plot(ax, theta, gain_lin, title):
     ax.plot(theta, gain_lin)
