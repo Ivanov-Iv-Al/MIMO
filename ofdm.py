@@ -84,8 +84,6 @@ for SNR_dB in SNR_dB_range:
                 cc[n] = num / den
 
         n_max = np.argmax(np.abs(cc))
-        if np.abs(cc[n_max]) < 0.9:
-            continue
         m_est = n_max - Nc
 
         ofdm_rx_sync_time = ofdm_rx_stream[m_est : m_est + Nc]
@@ -117,7 +115,7 @@ for SNR_dB in SNR_dB_range:
         total_errors += np.sum(tx_bits != rx_bits)
         total_symbols += N_data
 
-    ser = total_errors / total_symbols
+    ser = total_errors / total_symbols if total_symbols > 0 else 1.0
     ser_results.append(ser)
 
 constellation_rx = np.array(constellation_rx)
