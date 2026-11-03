@@ -101,17 +101,22 @@ def af_upa(Nv, Nh, TH, PH, theta0_deg=None, phi0_deg=None):
         AFh += np.exp(1j * (kh * n * np.sin(TH) * np.sin(PH) + n * deltah))
     return AFv, AFh
 
-def plot_upa(TH, PH, gain, title):
-    fig = plt.figure(figsize=(7, 6))
+def plot_upa(TH, PH, gain, title, step=4):
+    THs = TH[::step, ::step]
+    PHs = PH[::step, ::step]
+    R = gain[::step, ::step]
+    R = R / R.max()
+    X = R * np.sin(THs) * np.cos(PHs)
+    Y = R * np.sin(THs) * np.sin(PHs)
+    Z = R * np.cos(THs)
+    fig = plt.figure(figsize=(8, 7))
     ax = fig.add_subplot(111, projection='3d')
-    X = gain * np.sin(TH) * np.cos(PH)
-    Y = gain * np.sin(TH) * np.sin(PH)
-    Z = gain * np.cos(TH)
-    ax.plot_surface(X, Y, Z, cmap='viridis', linewidth=0, antialiased=True)
+    ax.plot_surface(X, Y, Z, cmap='viridis', linewidth=0,
+                    antialiased=False, shade=True)
+    ax.set_box_aspect((1, 1, 1))
+    ax.set_xlim(-1, 1); ax.set_ylim(-1, 1); ax.set_zlim(-1, 1)
     ax.set_title(title)
-    ax.set_xlabel('X')
-    ax.set_ylabel('Y')
-    ax.set_zlabel('Z')
+    ax.set_xlabel('X'); ax.set_ylabel('Y'); ax.set_zlabel('Z')
     plt.show()
 
 AFv, AFh = af_upa(Nv, Nh, TH, PH)
